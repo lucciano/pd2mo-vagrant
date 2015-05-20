@@ -8,3 +8,20 @@
         - tmux
         - vim
         - ubuntu-gnome-desktop
+        - build-essential
+        - subversion
+        - git
+        - libmetis-dev
+        - libscotch-dev
+        - bison++
+        - libginac-dev
+        - libqt4-dev
+
+    - name: download foo.conf
+      get_url: url=http://downloads.sourceforge.net/project/qssengine/3.0/qss-solver-amd64.deb dest=/root/qss-solver-amd64.deb mode=0440
+
+    - name: Install a .deb package
+      apt: deb=/root/qss-solver-amd64.deb
+
+    - name: Download qss-solver source
+      subversion: repo=svn://svn.code.sf.net/p/qssengine/code-0/trunk dest=/usr/src/qssengine 
