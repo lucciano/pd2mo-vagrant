@@ -1,0 +1,10 @@
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: Install packages
+      apt: name={{ item }} state=present
+      with_items: 
+        - git
+        - tmux
+        - vim
+        - ubuntu-gnome-desktop
