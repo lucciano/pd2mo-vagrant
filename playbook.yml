@@ -16,12 +16,18 @@
         - bison++
         - libginac-dev
         - libqt4-dev
-
-    - name: download foo.conf
-      get_url: url=http://downloads.sourceforge.net/project/qssengine/3.0/qss-solver-amd64.deb dest=/root/qss-solver-amd64.deb mode=0440
-
-    - name: Install a .deb package
-      apt: deb=/root/qss-solver-amd64.deb
+        - autoconf
+        - libboost-dev
 
     - name: Download qss-solver source
       subversion: repo=svn://svn.code.sf.net/p/qssengine/code-0/trunk dest=/usr/src/qssengine 
+
+    - name: Download modelicacc source
+      subversion: repo=svn://svn.code.sf.net/p/modelicacc/code  dest=/usr/src/mocc
+
+
+#    - name: Install a .deb package
+#      apt: deb=/root/qss-solver-amd64.deb
+
+#    - name: download qss-solver 
+#      get_url: url=http://downloads.sourceforge.net/project/qssengine/3.0/qss-solver-amd64.deb dest=/root/qss-solver-amd64.deb mode=0440
