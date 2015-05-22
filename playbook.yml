@@ -19,6 +19,9 @@
         - autoconf
         - libboost-dev
 
+    - name : delete qss-solver
+      shell : rm -rf /usr/src/qssengine
+
     - name: Download qss-solver source
       subversion: repo=svn://svn.code.sf.net/p/qssengine/code-0/trunk dest=/usr/src/qssengine 
 
@@ -28,8 +31,11 @@
 #    - name: download qss-solver 
 #      get_url: url=http://downloads.sourceforge.net/project/qssengine/3.0/qss-solver-amd64.deb dest=/root/qss-solver-amd64.deb mode=0440
 
+    - name : delete modelica cc
+      shell : rm -rf /usr/src/modelicacc-code
+
     - name: Download modelica cc
-      subversion: repo=svn://svn.code.sf.net/p/modelicacc/code/trunk dest=/usr/src/modelicacc-code
+      subversion: repo=svn://svn.code.sf.net/p/modelicacc/code/ dest=/usr/src/modelicacc-code
 
     - name: Download pd2mo source
       git : repo=https://github.com/lucciano/pd2mo.git dest=/usr/src/pd2mo
