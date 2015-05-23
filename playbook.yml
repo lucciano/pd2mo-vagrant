@@ -18,6 +18,11 @@
         - libqt4-dev
         - autoconf
         - libboost-dev
+        - libboost-test-dev
+        - libhdf5-dev
+
+    - name : make swap file
+      shell : sudo fallocate -l 4G /swapfile ; sudo chmod 600 /swapfile ; sudo mkswap /swapfile ; sudo swapon /swapfile
 
     - name : delete qss-solver
       shell : rm -rf /usr/src/qssengine
@@ -25,18 +30,31 @@
     - name: Download qss-solver source
       subversion: repo=svn://svn.code.sf.net/p/qssengine/code-0/trunk dest=/usr/src/qssengine 
 
-#    - name: Install a .deb package
-#      apt: deb=/root/qss-solver-amd64.deb
-
-#    - name: download qss-solver 
-#      get_url: url=http://downloads.sourceforge.net/project/qssengine/3.0/qss-solver-amd64.deb dest=/root/qss-solver-amd64.deb mode=0440
-
     - name : delete modelica cc
       shell : rm -rf /usr/src/modelicacc-code
 
     - name: Download modelica cc
       subversion: repo=svn://svn.code.sf.net/p/modelicacc/code/ dest=/usr/src/modelicacc-code
+ 
+    - name : Build modelica-cc lib
+      shell : cd /usr/src/modelicacc-code/trunk ; sudo autoreconf -f ; sudo ./configure ; sudo make install
+
+    - name : Download powerdevs code 
+      subversion: repo=svn://svn.code.sf.net/p/powerdevs/code/trunk dest=/usr/src/powerdevs-code
+   
+    - name : Build pdptt
+      shell: cd /usr/src/powerdevs-code ; sudo make ; sudo make install-lib
 
     - name: Download pd2mo source
       git : repo=https://github.com/lucciano/pd2mo.git dest=/usr/src/pd2mo
+
+    - name : Build pd2mo
+      shell: cd /usr/src/pd2mo ; sudo make 
+
+    - name: download qss-solver 
+      get_url: url=http://downloads.sourceforge.net/project/qssengine/3.0/qss-solver-amd64.deb dest=/root/qss-solver-amd64.deb mode=0440
+
+    - name : downloads powerdevs
+      get_url: url=http://downloads.sourceforge.net/project/powerdevs/powerdevs_amd64_953.deb dest=/root/powerdevs_amd64_953.deb mode=0440
+
 
