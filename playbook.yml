@@ -20,6 +20,9 @@
         - libboost-dev
         - libboost-test-dev
         - libhdf5-dev
+        - libconfig-dev
+        - libgsl0-dev
+        - gnuplot-x11
 
     - name : make swap file
       shell : sudo fallocate -l 4G /swapfile ; sudo chmod 600 /swapfile ; sudo mkswap /swapfile ; sudo swapon /swapfile
